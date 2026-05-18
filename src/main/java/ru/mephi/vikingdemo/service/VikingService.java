@@ -59,8 +59,7 @@ public class VikingService {
     }
 
     public long countByBeardAndHair(BeardStyle beardStyle, HairColor hairColor){
-        Predicate<Viking> condition = viking -> viking.beardStyle() == beardStyle
-                && viking.hairColor() == hairColor;
+        Predicate<Viking> condition = viking -> viking.beardStyle() == beardStyle && viking.hairColor() == hairColor  && viking.beardStyle() != BeardStyle.CLEAN_SHAVEN;
         return count(condition);
     }
 
