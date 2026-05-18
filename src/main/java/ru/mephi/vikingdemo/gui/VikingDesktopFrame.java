@@ -38,7 +38,7 @@ public class VikingDesktopFrame extends JFrame {
 
         JTabbedPane tabs = new JTabbedPane();
         tabs.addTab("Vikings", tablePanel);
-        tabs.addTab("Lambda service", new VikingLambdaPanel(vikingService, this::addNewVikings));
+        tabs.addTab("Lambda service", new VikingLambdaPanel(vikingService, vikings -> addNewVikings(vikings)));
 
         add(tabs, BorderLayout.CENTER);
     }
