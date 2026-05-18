@@ -1,19 +1,9 @@
 package ru.mephi.vikingdemo.gui;
 
-import ru.mephi.vikingdemo.model.BeardStyle;
-import ru.mephi.vikingdemo.model.HairColor;
-import ru.mephi.vikingdemo.model.Viking;
+import ru.mephi.vikingdemo.model.*;
 import ru.mephi.vikingdemo.service.VikingService;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -33,7 +23,6 @@ public class VikingLambdaPanel extends JPanel {
         this.vikingsCreated = vikingsCreated;
 
         setLayout(new BorderLayout());
-
         JPanel controls = new JPanel(new GridLayout(0, 1));
         controls.add(createAgePanel());
         controls.add(createBeardAndHairPanel());
@@ -41,7 +30,6 @@ public class VikingLambdaPanel extends JPanel {
         controls.add(createInfoPanel());
         controls.add(createIdsPanel());
         controls.add(createGeneratePanel());
-
         resultArea.setEditable(false);
 
         add(controls, BorderLayout.NORTH);
@@ -94,7 +82,6 @@ public class VikingLambdaPanel extends JPanel {
         JPanel panel = new JPanel();
         JButton oneAxeButton = new JButton("Один топор");
         JButton twoAxesButton = new JButton("Два топора");
-
         oneAxeButton.addActionListener(e -> showCount("С одним топором", vikingService.countByAxeCount(1)));
         twoAxesButton.addActionListener(e -> showCount("С двумя топорами", vikingService.countByAxeCount(2)));
 
@@ -135,7 +122,6 @@ public class VikingLambdaPanel extends JPanel {
     private JPanel createGeneratePanel() {
         JPanel panel = new JPanel();
         JButton generateButton = new JButton("Сгенерировать викингов");
-
         generateButton.addActionListener(e -> {
             List<Viking> generated = vikingService.generateRandomVikings(getGenerateCount());
             vikingsCreated.accept(generated);
@@ -149,7 +135,7 @@ public class VikingLambdaPanel extends JPanel {
     }
 
     private void showCount(String title, long count) {
-        resultArea.setText(title + "\nКоличество: " + count);
+        resultArea.setText(title +"\nКоличество: " + count);
     }
 
     private int getAge() {
