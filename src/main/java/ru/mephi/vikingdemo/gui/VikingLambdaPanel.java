@@ -1,14 +1,14 @@
 package ru.mephi.vikingdemo.gui;
 
 import ru.mephi.vikingdemo.model.*;
-import ru.mephi.vikingdemo.service.VikingService;
+import ru.mephi.vikingdemo.service.VikingLyambdaService;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 import java.util.function.Consumer;
 
 public class VikingLambdaPanel extends JPanel {
-    private final VikingService vikingService;
+    private final VikingLyambdaService vikingLyambdaService;
     private final Consumer<List<Viking>> vikingsCreated;
     private final JTextArea resultArea = new JTextArea();
     private final JTextField ageField = new JTextField("30", 5);
@@ -18,8 +18,8 @@ public class VikingLambdaPanel extends JPanel {
     private final JComboBox<BeardStyle> beardStyleBox = new JComboBox<>(BeardStyle.values());
     private final JComboBox<HairColor> hairColorBox = new JComboBox<>(HairColor.values());
 
-    public VikingLambdaPanel(VikingService vikingService, Consumer<List<Viking>> vikingsCreated) {
-        this.vikingService = vikingService;
+    public VikingLambdaPanel(VikingLyambdaService vikingLyambdaService, Consumer<List<Viking>> vikingsCreated) {
+        this.vikingLyambdaService = vikingLyambdaService;
         this.vikingsCreated = vikingsCreated;
 
         setLayout(new BorderLayout());
@@ -50,10 +50,10 @@ public class VikingLambdaPanel extends JPanel {
         JButton inRangeButton = new JButton("В диапазоне");
         JButton outRangeButton = new JButton("Вне диапазона");
 
-        moreButton.addActionListener(e -> showCount("Возраст больше " + getAge(), vikingService.countAgeMoreThan(getAge())));
-        lessButton.addActionListener(e -> showCount("Возраст меньше " + getAge(), vikingService.countAgeLessThan(getAge())));
-        inRangeButton.addActionListener(e -> showCount("Возраст в диапазоне", vikingService.countAgeInRange(getMinAge(), getMaxAge())));
-        outRangeButton.addActionListener(e -> showCount("Возраст вне диапазона", vikingService.countAgeOutOfRange(getMinAge(), getMaxAge())));
+        moreButton.addActionListener(e -> showCount("Возраст больше " + getAge(), vikingLyambdaService.countAgeMoreThan(getAge())));
+        lessButton.addActionListener(e -> showCount("Возраст меньше " + getAge(), vikingLyambdaService.countAgeLessThan(getAge())));
+        inRangeButton.addActionListener(e -> showCount("Возраст в диапазоне", vikingLyambdaService.countAgeInRange(getMinAge(), getMaxAge())));
+        outRangeButton.addActionListener(e -> showCount("Возраст вне диапазона", vikingLyambdaService.countAgeOutOfRange(getMinAge(), getMaxAge())));
 
         panel.add(moreButton);
         panel.add(lessButton);
@@ -65,10 +65,7 @@ public class VikingLambdaPanel extends JPanel {
     private JPanel createBeardAndHairPanel() {
         JPanel panel = new JPanel();
         JButton button = new JButton("Форма бороды + цвет волос");
-
-        button.addActionListener(e -> showCount("Форма бороды и цвет волос",
-                vikingService.countByBeardAndHair((BeardStyle) beardStyleBox.getSelectedItem(),
-                        (HairColor) hairColorBox.getSelectedItem())));
+        button.addActionListener(e -> showCount("Форма бороды и цвет волос", vikingLyambdaService.countByBeardAndHair((BeardStyle) beardStyleBox.getSelectedItem(), (HairColor) hairColorBox.getSelectedItem())));
 
         panel.add(new JLabel("Борода:"));
         panel.add(beardStyleBox);
@@ -82,8 +79,8 @@ public class VikingLambdaPanel extends JPanel {
         JPanel panel = new JPanel();
         JButton oneAxeButton = new JButton("Один топор");
         JButton twoAxesButton = new JButton("Два топора");
-        oneAxeButton.addActionListener(e -> showCount("С одним топором", vikingService.countByAxeCount(1)));
-        twoAxesButton.addActionListener(e -> showCount("С двумя топорами", vikingService.countByAxeCount(2)));
+        oneAxeButton.addActionListener(e -> showCount("С одним топором", vikingLyambdaService.countByAxeCount(1)));
+        twoAxesButton.addActionListener(e -> showCount("С двумя топорами", vikingLyambdaService.countByAxeCount(2)));
 
         panel.add(oneAxeButton);
         panel.add(twoAxesButton);
@@ -96,9 +93,9 @@ public class VikingLambdaPanel extends JPanel {
         JButton legendaryButton = new JButton("Легендарное снаряжение");
         JButton redSortedButton = new JButton("Рыжебородые по возрасту");
 
-        randomTallButton.addActionListener(e -> resultArea.setText(vikingService.getRandomTallVikingText()));
-        legendaryButton.addActionListener(e -> resultArea.setText(vikingService.getLegendaryVikingsText()));
-        redSortedButton.addActionListener(e -> resultArea.setText(vikingService.getRedBeardVikingsSortedByAgeText()));
+        randomTallButton.addActionListener(e -> resultArea.setText(vikingLyambdaService.getRandomTallVikingText()));
+        legendaryButton.addActionListener(e -> resultArea.setText(vikingLyambdaService.getLegendaryVikingsText()));
+        redSortedButton.addActionListener(e -> resultArea.setText(vikingLyambdaService.getRedBeardVikingsSortedByAgeText()));
 
         panel.add(randomTallButton);
         panel.add(legendaryButton);
@@ -111,8 +108,8 @@ public class VikingLambdaPanel extends JPanel {
         JButton maxIdButton = new JButton("Max ID");
         JButton evenIdsButton = new JButton("Четные ID");
 
-        maxIdButton.addActionListener(e -> resultArea.setText("Последняя запись: " + vikingService.getMaxId()));
-        evenIdsButton.addActionListener(e -> resultArea.setText("Четные ID: " + vikingService.getEvenIdsText()));
+        maxIdButton.addActionListener(e -> resultArea.setText("Последняя запись: " + vikingLyambdaService.getMaxId()));
+        evenIdsButton.addActionListener(e -> resultArea.setText("Четные ID: " + vikingLyambdaService.getEvenIdsText()));
 
         panel.add(maxIdButton);
         panel.add(evenIdsButton);
@@ -123,7 +120,7 @@ public class VikingLambdaPanel extends JPanel {
         JPanel panel = new JPanel();
         JButton generateButton = new JButton("Сгенерировать викингов");
         generateButton.addActionListener(e -> {
-            List<Viking> generated = vikingService.generateRandomVikings(getGenerateCount());
+            List<Viking> generated = vikingLyambdaService.generateRandomVikings(getGenerateCount());
             vikingsCreated.accept(generated);
             resultArea.setText("Сгенерировано викингов: " + generated.size());
         });

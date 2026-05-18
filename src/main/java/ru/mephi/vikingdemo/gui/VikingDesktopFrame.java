@@ -1,7 +1,7 @@
 package ru.mephi.vikingdemo.gui;
 
 import ru.mephi.vikingdemo.model.Viking;
-import ru.mephi.vikingdemo.service.VikingService;
+import ru.mephi.vikingdemo.service.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -9,10 +9,12 @@ import java.util.List;
 public class VikingDesktopFrame extends JFrame {
 
     private final VikingService vikingService;
+    private final VikingLyambdaService vikingLyambdaService;
     private final VikingTableModel tableModel = new VikingTableModel();
 
-    public VikingDesktopFrame(VikingService vikingService) {
+    public VikingDesktopFrame(VikingService vikingService, VikingLyambdaService vikingLyambdaService) {
         this.vikingService = vikingService;
+        this.vikingLyambdaService = vikingLyambdaService;
 
         setTitle("Viking Demo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,8 +40,7 @@ public class VikingDesktopFrame extends JFrame {
 
         JTabbedPane tabs = new JTabbedPane();
         tabs.addTab("Vikings", tablePanel);
-        tabs.addTab("Lambda service", new VikingLambdaPanel(vikingService, vikings -> addNewVikings(vikings)));
-
+        tabs.addTab("Lambda service", new VikingLambdaPanel(vikingLyambdaService, vikings -> addNewVikings(vikings)));
         add(tabs, BorderLayout.CENTER);
     }
 
