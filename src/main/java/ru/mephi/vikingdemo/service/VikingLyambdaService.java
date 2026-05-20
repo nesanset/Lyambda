@@ -69,7 +69,7 @@ public class VikingLyambdaService {
         return Arrays.stream(ids).max((first, second) -> Integer.compare(first, second)).orElse(0);
     }
 
-    public String getEvenIdsText(){
+    public String getEvenIdsText(){//сделать вывод массивом
         List<Integer> idList = vikingService.findAll().stream().map(viking -> viking.id()).collect(Collectors.toList());
         Integer[] ids = idList.toArray(new Integer[0]);
         return Arrays.stream(ids).filter(id -> id % 2 == 0).map(id -> String.valueOf(id)).collect(Collectors.joining(", "));
