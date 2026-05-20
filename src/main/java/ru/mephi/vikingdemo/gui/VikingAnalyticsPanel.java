@@ -4,13 +4,12 @@ import ru.mephi.vikingdemo.service.VikingLyambdaService;
 import javax.swing.*;
 import java.awt.*;
 
-public class VikingAnalyticsPanel extends JPanel {
+public class VikingAnalyticsPanel extends JPanel{
     private final VikingLyambdaService vikingLyambdaService;
     private final JTextArea resultArea = new JTextArea();
 
-    public VikingAnalyticsPanel(VikingLyambdaService vikingLyambdaService) {
+    public VikingAnalyticsPanel(VikingLyambdaService vikingLyambdaService){
         this.vikingLyambdaService = vikingLyambdaService;
-
         setLayout(new BorderLayout(8, 8));
         JButton showButton = new JButton("Показать данные");
         showButton.addActionListener(e -> showScreenInfo());

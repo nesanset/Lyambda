@@ -24,58 +24,45 @@ public class VikingController {
     }
     
     @GetMapping
-    @Operation(summary = "Получить список созданных викингов", 
-            operationId = "getAllVikings")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Список успешно получен")
-    })
+    @Operation(summary = "Получить список созданных викингов", operationId = "getAllVikings")
     public List<Viking> getAllVikings() {
         System.out.println("GET /api/vikings called");
         return vikingService.findAll();
     }
 
     @GetMapping("/test")
-    @Operation(summary = "Получить список тестовых викингов", 
-            operationId = "getTest")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Список успешно получен")
-    })
+    @Operation(summary = "Получить список тестовых викингов", operationId = "getTest")
     public List<String> test() {
         System.out.println("GET /api/vikings/test called");
         return List.of("Ragnar", "Bjorn");
     }
     
     @PostMapping("/add")
-    @Operation(summary = "Добавить случайного викинга",
-            description = "Создает одного случайного викинга и добавляет его в список.")
+    @Operation(summary = "Добавить случайного викинга")
     public void addViking(){
         vikingListener.testAdd();
     }
 
     @PostMapping("/generate")
-    @Operation(summary = "Сгенерировать несколько викингов",
-            description = "Создает указанное количество случайных викингов через существующий сервис.")
+    @Operation(summary = "Сгенерировать несколько викингов")
     public List<Viking> generateRandomVikings(@RequestParam int count){
         return vikingListener.generate(count);
     }
 
     @PostMapping
-    @Operation(summary = "Добавить переданного викинга",
-            description = "Добавляет в список викинга, который передан в теле запроса.")
+    @Operation(summary = "Добавить переданного викинга")
     public void addViking(@RequestBody Viking viking) {
         vikingListener.add(viking);
     }
 
     @DeleteMapping("/delete")
-    @Operation(summary = "Удалить викинга",
-            description = "Удаляет викинга по индексу в списке.")
+    @Operation(summary = "Удалить викинга")
     public void deleteViking(@RequestParam int index) {
         vikingListener.delete(index);
     }
 
     @PutMapping("/update")
-    @Operation(summary = "Обновить викинга",
-            description = "Заменяет викинга по индексу данными из тела запроса.")
+    @Operation(summary = "Обновить викинга")
     public void updateViking(@RequestParam int index, @RequestBody Viking viking) {
         vikingListener.update(index, viking);
     }
