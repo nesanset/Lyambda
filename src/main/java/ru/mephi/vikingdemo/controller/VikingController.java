@@ -1,9 +1,6 @@
 package ru.mephi.vikingdemo.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import ru.mephi.vikingdemo.model.Viking;
 import ru.mephi.vikingdemo.service.VikingService;
@@ -12,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/vikings")
-@Tag(name = "Vikings", description = "Операции с викингами")
 public class VikingController {
 
     private final VikingService vikingService;

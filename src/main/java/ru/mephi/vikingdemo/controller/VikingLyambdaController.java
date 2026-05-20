@@ -1,14 +1,12 @@
 package ru.mephi.vikingdemo.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import ru.mephi.vikingdemo.model.*;
 import ru.mephi.vikingdemo.service.VikingLyambdaService;
 
 @RestController
 @RequestMapping("/api/lyambda")
-@Tag(name = "Lyambda analytics")
 public class VikingLyambdaController{
     private final VikingLyambdaService vikingLyambdaService;
 
