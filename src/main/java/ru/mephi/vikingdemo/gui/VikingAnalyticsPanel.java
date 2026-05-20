@@ -17,8 +17,6 @@ public class VikingAnalyticsPanel extends JPanel{
         buttonPanel.add(showButton);
 
         resultArea.setEditable(false);
-        resultArea.setLineWrap(true);
-        resultArea.setWrapStyleWord(true);
         add(buttonPanel, BorderLayout.NORTH);
         add(new JScrollPane(resultArea), BorderLayout.CENTER);
     }
