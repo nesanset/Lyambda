@@ -46,21 +46,29 @@ public class VikingController {
     }
     
     @PostMapping("/add")
+    @Operation(summary = "Добавить случайного викинга",
+            description = "Создает одного случайного викинга и добавляет его в список.")
     public void addViking(){
         vikingListener.testAdd();
     }
 
     @PostMapping
+    @Operation(summary = "Добавить переданного викинга",
+            description = "Добавляет в список викинга, который передан в теле запроса.")
     public void addViking(@RequestBody Viking viking) {
         vikingListener.add(viking);
     }
 
     @DeleteMapping("/delete")
+    @Operation(summary = "Удалить викинга",
+            description = "Удаляет викинга по индексу в списке.")
     public void deleteViking(@RequestParam int index) {
         vikingListener.delete(index);
     }
 
     @PutMapping("/update")
+    @Operation(summary = "Обновить викинга",
+            description = "Заменяет викинга по индексу данными из тела запроса.")
     public void updateViking(@RequestParam int index, @RequestBody Viking viking) {
         vikingListener.update(index, viking);
     }

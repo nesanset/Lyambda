@@ -2,9 +2,7 @@ package ru.mephi.vikingdemo.service;
 
 import org.springframework.stereotype.Service;
 import ru.mephi.vikingdemo.model.*;
-
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collectors;
 
@@ -69,13 +67,13 @@ public class VikingLyambdaService {
         return format(vikingService.findAll().stream().filter(condition).sorted((first, second) -> Integer.compare(first.age(), second.age())).collect(Collectors.toList()));
     }
 
-    public int getMaxId() {
+    public int getMaxId(){
         List<Integer> idList = vikingService.findAll().stream().map(viking -> viking.id()).collect(Collectors.toList());
         Integer[] ids = idList.toArray(new Integer[0]);
         return Arrays.stream(ids).max((first, second) -> Integer.compare(first, second)).orElse(0);
     }
 
-    public String getEvenIdsText() {
+    public String getEvenIdsText(){
         List<Integer> idList = vikingService.findAll().stream().map(viking -> viking.id()).collect(Collectors.toList());
         Integer[] ids = idList.toArray(new Integer[0]);
         return Arrays.stream(ids).filter(id -> id % 2 == 0).map(id -> String.valueOf(id)).collect(Collectors.joining(", "));

@@ -2,7 +2,6 @@ package ru.mephi.vikingdemo.gui;
 
 import ru.mephi.vikingdemo.model.*;
 import ru.mephi.vikingdemo.service.VikingLyambdaService;
-
 import javax.swing.*;
 import java.awt.*;
 
