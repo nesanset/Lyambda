@@ -24,39 +24,19 @@ public class VikingService {
         return List.copyOf(vikings);
     }
 
-    public Viking createRandomViking(){
-        Viking viking = vikingFactory.createRandomViking(nextId++);
-        vikings.add(viking);
-        return viking;
-    }
-
-    public List<Viking> generateRandomVikings(int count) {
+    public List<Viking> generateRandomVikings(int count){
         List<Viking> generated = IntStream.range(0, count).mapToObj(index -> vikingFactory.createRandomViking(nextId++)).collect(Collectors.toList());
         generated.forEach(viking -> vikings.add(viking));
         return generated;
     }
 
-    public Viking createViking(Viking viking){
-        Viking saved = viking.id() > 0 ? viking : new Viking(
-                nextId++,
-                viking.name(),
-                viking.age(),
-                viking.heightCm(),
-                viking.hairColor(),
-                viking.beardStyle(),
-                viking.equipment()
-        );
-
-        if (saved.id() >= nextId) {
-            nextId = saved.id() + 1;
-        }
-
-        vikings.add(saved);
-        return saved;
+    public Viking saveViking(Viking viking){
+        vikings.add(viking);
+        return viking;
     }
 
     public int removeViking(int index) throws IndexOutOfBoundsException{
-        if (index < 0 || index >= vikings.size()) {
+        if (index < 0 || index >= vikings.size()){
             throw new IndexOutOfBoundsException("Такого викинга не существует");
         }
         vikings.remove(index);
@@ -64,7 +44,7 @@ public class VikingService {
     }
 
     public Viking updateViking(int index, Viking viking) throws IndexOutOfBoundsException{
-        if (index < 0 || index >= vikings.size()) {
+        if (index < 0 || index >= vikings.size()){
             throw new IndexOutOfBoundsException("Такого викинга не существует");
         }
         vikings.set(index, viking);

@@ -34,11 +34,11 @@ public class VikingListener {
     }
 
     void testAdd() {
-        gui.addNewViking(service.createRandomViking());
+        gui.addNewViking(service.generateRandomVikings(1).get(0));
     }
 
     void add(Viking viking) {
-        gui.addNewViking(service.createViking(viking));
+        gui.addNewViking(service.saveViking(viking));
     }
 
     void delete(int index) {

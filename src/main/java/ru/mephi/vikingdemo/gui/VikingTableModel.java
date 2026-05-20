@@ -13,18 +13,18 @@ public class VikingTableModel extends AbstractTableModel {
     private final String[] columns = {"ID", "Name", "Age", "Height (cm)", "Hair color", "Beard style", "Equipment"};
     private final List<Viking> data = new ArrayList<>();
 
-    public void addViking(Viking viking) {
+    public void addViking(Viking viking){
         int row = data.size();
         data.add(viking);
         fireTableRowsInserted(row, row);
     }
 
-    public void removeViking(int index) {
+    public void removeViking(int index){
         data.remove(index);
         fireTableRowsDeleted(index, index);
     }
 
-    public void updateViking(int index, Viking viking) {
+    public void updateViking(int index, Viking viking){
         data.set(index, viking);
         fireTableRowsUpdated(index, index);
     }
@@ -60,8 +60,6 @@ public class VikingTableModel extends AbstractTableModel {
     }
 
     private String formatEquipment(List<EquipmentItem> equipment) {
-        return equipment.stream()
-                .map(item -> item.name() + " [" + item.quality() + "]")
-                .collect(Collectors.joining(", "));
+        return equipment.stream().map(item -> item.name() + " [" + item.quality() + "]").collect(Collectors.joining(", "));
     }
 }

@@ -7,7 +7,8 @@ import ru.mephi.vikingdemo.gui.VikingDesktopFrame;
 
 import javax.swing.SwingUtilities;
 import ru.mephi.vikingdemo.controller.VikingListener;
-import ru.mephi.vikingdemo.service.*;
+import ru.mephi.vikingdemo.service.VikingLyambdaService;
+import ru.mephi.vikingdemo.service.VikingService;
 
 @SpringBootApplication
 public class VikingDemoApplication {

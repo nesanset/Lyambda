@@ -1,24 +1,21 @@
 package ru.mephi.vikingdemo.gui;
 
 import ru.mephi.vikingdemo.model.Viking;
-import ru.mephi.vikingdemo.service.*;
+import ru.mephi.vikingdemo.service.VikingLyambdaService;
+import ru.mephi.vikingdemo.service.VikingService;
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class VikingDesktopFrame extends JFrame {
-
     private final VikingService vikingService;
-    private final VikingLyambdaService vikingLyambdaService;
     private final VikingTableModel tableModel = new VikingTableModel();
 
     public VikingDesktopFrame(VikingService vikingService, VikingLyambdaService vikingLyambdaService) {
         this.vikingService = vikingService;
-        this.vikingLyambdaService = vikingLyambdaService;
 
         setTitle("Viking Demo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(new Dimension(1000, 420));
+        setSize(new Dimension(1050, 500));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(10, 10));
 
@@ -39,13 +36,14 @@ public class VikingDesktopFrame extends JFrame {
         tablePanel.add(bottomPanel, BorderLayout.SOUTH);
 
         JTabbedPane tabs = new JTabbedPane();
-        tabs.addTab("Vikings", tablePanel);
-        tabs.addTab("Lambda service", new VikingLambdaPanel(vikingLyambdaService, vikings -> addNewVikings(vikings)));
+        tabs.addTab("Викинги", tablePanel);
+        tabs.addTab("Аналитика", new VikingAnalyticsPanel(vikingLyambdaService));
+
         add(tabs, BorderLayout.CENTER);
     }
 
-    private void onCreateViking() {
-        Viking viking = vikingService.createRandomViking();
+    private void onCreateViking(){
+        Viking viking = vikingService.generateRandomVikings(1).get(0);
         tableModel.addViking(viking);
     }
     
@@ -53,15 +51,11 @@ public class VikingDesktopFrame extends JFrame {
         tableModel.addViking(viking);
     }
 
-    public void addNewVikings(List<Viking> vikings) {
-        vikings.forEach(viking -> tableModel.addViking(viking));
-    }
-
-    public void removeOldViking(int index) {
+    public void removeOldViking(int index){
         tableModel.removeViking(index);
     }
 
-    public void updateOldViking(int index, Viking viking) {
+    public void updateOldViking(int index, Viking viking){
         tableModel.updateViking(index, viking);
     }
 }
