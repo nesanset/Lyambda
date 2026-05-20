@@ -77,13 +77,10 @@ public class VikingLambdaPanel extends JPanel {
 
     private JPanel createAxesPanel() {
         JPanel panel = new JPanel();
-        JButton oneAxeButton = new JButton("Один топор");
-        JButton twoAxesButton = new JButton("Два топора");
-        oneAxeButton.addActionListener(e -> showCount("С одним топором", vikingLyambdaService.countByAxeCount(1)));
-        twoAxesButton.addActionListener(e -> showCount("С двумя топорами", vikingLyambdaService.countByAxeCount(2)));
+        JButton axesButton = new JButton("Один или два топора");
+        axesButton.addActionListener(e -> showCount("С одним или двумя топорами", vikingLyambdaService.countByOneOrTwoAxes()));
 
-        panel.add(oneAxeButton);
-        panel.add(twoAxesButton);
+        panel.add(axesButton);
         return panel;
     }
 

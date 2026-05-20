@@ -44,8 +44,8 @@ public class VikingLyambdaService {
         return count(condition);
     }
 
-    public long countByAxeCount(int axeCount){
-        Predicate<Viking> condition = viking -> countAxes(viking) == axeCount;
+    public long countByOneOrTwoAxes() {
+        Predicate<Viking> condition = viking -> countAxes(viking) == 1 || countAxes(viking) == 2;
         return count(condition);
     }
 
