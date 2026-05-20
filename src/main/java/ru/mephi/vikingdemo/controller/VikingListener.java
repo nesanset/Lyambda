@@ -7,9 +7,6 @@ package ru.mephi.vikingdemo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.mephi.vikingdemo.gui.VikingDesktopFrame;
-import ru.mephi.vikingdemo.model.BeardStyle;
-import ru.mephi.vikingdemo.model.EquipmentItem;
-import ru.mephi.vikingdemo.model.HairColor;
 import ru.mephi.vikingdemo.model.Viking;
 import ru.mephi.vikingdemo.service.VikingService;
 
@@ -35,6 +32,12 @@ public class VikingListener {
 
     void testAdd() {
         gui.addNewViking(service.generateRandomVikings(1).get(0));
+    }
+
+    List<Viking> generate(int count) {
+        List<Viking> vikings = service.generateRandomVikings(count);
+        vikings.forEach(viking -> gui.addNewViking(viking));
+        return vikings;
     }
 
     void add(Viking viking) {

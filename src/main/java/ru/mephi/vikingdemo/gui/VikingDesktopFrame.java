@@ -37,7 +37,7 @@ public class VikingDesktopFrame extends JFrame {
 
         JTabbedPane tabs = new JTabbedPane();
         tabs.addTab("Викинги", tablePanel);
-        tabs.addTab("Аналитика", new VikingAnalyticsPanel(vikingLyambdaService));
+        tabs.addTab("Вывод", new VikingAnalyticsPanel(vikingLyambdaService));
 
         add(tabs, BorderLayout.CENTER);
     }

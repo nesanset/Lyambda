@@ -52,6 +52,13 @@ public class VikingController {
         vikingListener.testAdd();
     }
 
+    @PostMapping("/generate")
+    @Operation(summary = "Сгенерировать несколько викингов",
+            description = "Создает указанное количество случайных викингов через существующий сервис.")
+    public List<Viking> generateRandomVikings(@RequestParam int count){
+        return vikingListener.generate(count);
+    }
+
     @PostMapping
     @Operation(summary = "Добавить переданного викинга",
             description = "Добавляет в список викинга, который передан в теле запроса.")

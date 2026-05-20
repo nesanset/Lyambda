@@ -14,10 +14,6 @@ public class VikingLyambdaService {
         this.vikingService = vikingService;
     }
 
-    public List<Viking> generateRandomVikings(int count){
-        return vikingService.generateRandomVikings(count);
-    }
-
     public long countAgeMoreThan(int age){
         Predicate<Viking> condition = viking -> viking.age() > age;
         return count(condition);

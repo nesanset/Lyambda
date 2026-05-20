@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.mephi.vikingdemo.model.*;
 import ru.mephi.vikingdemo.service.VikingLyambdaService;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/lyambda")
 @Tag(name = "Lyambda analytics", description = "Аналитика по викингам через лямбда-функции")
@@ -16,13 +14,6 @@ public class VikingLyambdaController{
 
     public VikingLyambdaController(VikingLyambdaService vikingLyambdaService){
         this.vikingLyambdaService = vikingLyambdaService;
-    }
-
-    @PostMapping("/generate")
-    @Operation(summary = "Сгенерировать несколько викингов",
-            description = "Создает указанное количество случайных викингов через существующий сервис.")
-    public List<Viking> generateRandomVikings(@RequestParam int count){
-        return vikingLyambdaService.generateRandomVikings(count);
     }
 
     @GetMapping("/age/more")
